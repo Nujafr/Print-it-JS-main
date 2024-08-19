@@ -19,13 +19,43 @@ const slides = [
 
 const arrowLeft = document.querySelector('.arrow_left');
 const arrowRight = document.querySelector('.arrow_right');
+const dots = document.querySelectorAll('.dot');
+const bannerImg = document.querySelector('.banner-img');
+const bannerText = document.querySelector('#banner p');
 
+let currentSlide = 0;
+
+function updateCarousel() {
+	// Update de la bannière et du texte
+	bannerImg.src = `./assets/images/slideshow/${slides[currentSlide].image}`;
+	bannerText.innerHTML = slides[currentSlide].tagLine;
+
+	// Update des points
+	dots.forEach((dot, index) => {
+		dot.classList.toggle('dot_selected', index === currentSlide);
+	});
+}
+
+function nextSlide() {
+	currentSlide = (currentSlide + 1) % slides.length;
+	updateCarousel();
+}
+
+function prevSlide() {
+	currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+	updateCarousel();
+}
+
+// Gestion des flèches
 arrowLeft.addEventListener('click', () => {
 	console.log('Left arrow clicked');
-	// Add carousel logic for left click here
+	prevSlide();
 });
 
 arrowRight.addEventListener('click', () => {
 	console.log('Right arrow clicked');
-	// Add carousel logic for right click here
+	nextSlide();
 });
+
+// Initialisation du carrousel
+updateCarousel();
