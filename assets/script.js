@@ -37,12 +37,18 @@ function updateCarousel() {
 }
 
 function nextSlide() {
-	currentSlide = (currentSlide + 1) % slides.length;
+	currentSlide++;
+	if (currentSlide >= slides.length) {
+		currentSlide = 0;
+	}
 	updateCarousel();
 }
 
 function prevSlide() {
-	currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+	currentSlide--;
+	if (currentSlide < 0) {
+		currentSlide = slides.length - 1;
+	}
 	updateCarousel();
 }
 
